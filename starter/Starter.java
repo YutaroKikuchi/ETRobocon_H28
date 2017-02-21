@@ -20,14 +20,10 @@ public class Starter {
 	StartCommandDetecter scd;
 	tailCtrl tail;
 
-	public void start(WheelMotor wheel,TailMotor tail,BrightSensor bright,
-			UltrasonicSensor sonar,GyroSensor gyro,TouchSensor touch){
+	public void start(TailMotor tail,TouchSensor touch){
 
 		scd = new StartCommandDetecter(touch);
 		this.tail = new tailCtrl(tail);
-
-
-		init(wheel,tail,bright,sonar,gyro,touch);
 
 		Timer CommandTimer = new Timer();
 		TimerTask CommandTask = new TimerTask(){
@@ -52,18 +48,19 @@ public class Starter {
 
 		CommandTimer.cancel();
 
+		/*
 		while(true){
 
-			if(this.tail.getTailAngle() >= 96){
+			if(this.tail.getTailAngle() >= 92){
 				this.tail.tailTwo();
 				break;
 			}
 
 			this.tail.tailStart();
-		}
+		}*/
 	}
 
-	static void init(WheelMotor wheel,TailMotor tail,BrightSensor bright,
+	public void init(WheelMotor wheel,TailMotor tail,BrightSensor bright,
 			UltrasonicSensor sonar,GyroSensor gyro,TouchSensor touch){
 		LCD.drawString("Please Wait...  ", 0, 4);
 		/*Hardware.gyro.reset();

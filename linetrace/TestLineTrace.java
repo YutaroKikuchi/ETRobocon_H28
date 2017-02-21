@@ -12,6 +12,7 @@ import hardware.TouchSensor;
 import hardware.UltrasonicSensor;
 import hardware.WheelMotor;
 import lejos.hardware.Sound;
+import lejos.hardware.lcd.LCD;
 import lejos.hardware.port.MotorPort;
 import lejos.hardware.port.SensorPort;
 import lejos.hardware.port.TachoMotorPort;
@@ -23,6 +24,9 @@ import lejos.hardware.sensor.SensorMode;
 import lejos.robotics.SampleProvider;
 import lejos.utility.Delay;
 import starter.Calibrater;
+import starter.DeviceInitializer;
+import starter.KeyDetecter;
+import starter.LCDDisplay;
 import starter.Starter;
 
 public class TestLineTrace {
@@ -68,7 +72,10 @@ public class TestLineTrace {
 		final DistanceMeasure dm = new DistanceMeasure(wheel);
 		BrightTargetKeeper tk = new BrightTargetKeeper();
 		Calibrater calib = new Calibrater(bright, touch);
+		DeviceInitializer di = new DeviceInitializer(motorPortL, motorPortR, motorPortT, gyroSensor);
 		float distance = 0.0F;
+
+		start.init(wheel,tail,bright,sonar,gyro,touch);
 
 		Sound.beep();
 		calib.calibration();
@@ -77,12 +84,38 @@ public class TestLineTrace {
 		tk.setGray(calib.getTargets()[2]);
 		Sound.beep();
 
+		Timer lcdtimer = new Timer();
+		LCDDisplay lcd = new LCDDisplay();
+		lcdtimer.scheduleAtFixedRate(lcd, 0, 500);
+
+		Timer keytimer = new Timer();
+		KeyDetecter key = new KeyDetecter();
+		lcdtimer.scheduleAtFixedRate(key, 0, 200);
+
 		ultrasonicSensor.enable();
-		motorPortL.resetTachoCount();
-		motorPortR.resetTachoCount();
-		motorPortT.resetTachoCount();
-		gyroSensor.reset();
-		start.start(wheel, tail, bright, sonar, gyro, touch);
+		di.initTireMotor();
+		di.initTailMotor();
+		di.initGyroSensor();
+
+		LCD.clear();
+		while(true){
+
+			if(key.checkFlagNext() == true){
+				break;
+			}else if(key.checkFlagGyro() == true){
+				ultrasonicSensor.enable();
+				di.initTireMotor();
+				di.initTailMotor();
+				di.initGyroSensor();
+			}
+
+			lcd.setString("Gyro:"+ gyro.getGyroValue());
+			Delay.msDelay(20);
+		}
+
+		lcdtimer.cancel();
+		keytimer.cancel();
+		start.start(tail, touch);
 
 
 		//Sound.beep();
