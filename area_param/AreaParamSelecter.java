@@ -42,18 +42,18 @@ public class AreaParamSelecter {
 		new AreaParamKeeper(8.0F,	80.0F,	0.0F,	30.0F,	15.0F,	0.0F)
 		*/
 
-		/*
+
 		//8/20の試走会のパラメータ Rコース用
-		new AreaParamKeeper(-10.0F,	0.1F,	60.0F,	30.0F,	15.0F,	40.0F),
+		new AreaParamKeeper(-10.0F,	0.1F,	30.0F,	30.0F,	15.0F,	40.0F),
 		new AreaParamKeeper(0.1F,	2.3F,	30.0F,	30.0F,	15.0F,	100.0F),
 		new AreaParamKeeper(2.3F,	2.9F,	130.0F,	30.0F,	15.0F,	60.0F),
 		new AreaParamKeeper(2.9F,	4.7F,	30.0F,	30.0F,	15.0F,	100.0F),
 		new AreaParamKeeper(4.7F,	5.8F,	150.0F,	30.0F,	50.0F,	55.0F),
-		new AreaParamKeeper(5.8F,	6.922F,	30.0F,	30.0F,	15.0F,	100.0F),
+		new AreaParamKeeper(5.8F,	6.922F,	60.0F,	30.0F,	15.0F,	100.0F),
 		new AreaParamKeeper(6.92F,	7.953F,	160.0F,	30.0F,	15.0F,	60.0F),
 		new AreaParamKeeper(7.95F,	8.0F,	30.0F,	30.0F,	15.0F,	50.0F),
 		new AreaParamKeeper(8.0F,	80.0F,	0.0F,	30.0F,	15.0F,	0.0F)
-		*/
+
 	};
 
 /*

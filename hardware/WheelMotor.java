@@ -14,6 +14,9 @@ public class WheelMotor {
 
 		left.setPWMMode(BasicMotorPort.PWM_BRAKE);
 		right.setPWMMode(BasicMotorPort.PWM_BRAKE);
+
+		left.resetTachoCount();
+		right.resetTachoCount();
 	}
 
 	public void controlWheel(int leftPWM, int rightPWM){

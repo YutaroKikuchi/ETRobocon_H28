@@ -31,6 +31,17 @@ public class LineTracer {
 		float forward = fs.SelectForward();
 		float turn = tc.calcTurn() * -1;
 
+		wmc.setForward(forward);
+		wmc.setTurn(turn);
+		wmc.controlWheel();
+	}
+
+	public void linetrace_init(){
+		tail.tailTwo();
+
+		float forward = fs.SelectForward();
+		float turn = tc.calcTurn() * -1;
+
 		wmc.setForward(0.0F);
 		wmc.setTurn(0.0F);
 		wmc.controlWheel();

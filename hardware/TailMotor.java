@@ -13,6 +13,7 @@ public class TailMotor {
 	public TailMotor(TachoMotorPort tail){
 		this.tail =tail;
 		tail.setPWMMode(BasicMotorPort.PWM_BRAKE);
+		tail.resetTachoCount();
 	}
 
 	public int getTailAngle(){

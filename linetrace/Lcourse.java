@@ -72,7 +72,14 @@ public class Lcourse {
 		DeviceInitializer di = new DeviceInitializer(motorPortL, motorPortR, motorPortT, gyroSensor);
 		float distance = 0.0F;
 
-		start.init(wheel,tail,bright,sonar,gyro,touch);
+		DistanceTask distancetask = new DistanceTask(lt,dm,distance);
+		start.init(lt,distancetask);
+
+
+		for(int i=0;i<20;i++){
+			wheel.controlWheel(0, 0);
+			tail.controlMotor(0);
+		}
 
 		Sound.beep();
 		calib.calibration();
@@ -129,7 +136,7 @@ public class Lcourse {
 
 		//下のタイマは走行距離測定して，PID係数と速度を切り替えている。周期は100ms
 		Timer distanceTimer = new Timer();
-		DistanceTask distancetask = new DistanceTask(lt,dm,distance);
+		//DistanceTask distancetask = new DistanceTask(lt,dm,distance);
 
 
 		driveTimer.scheduleAtFixedRate(driveTask, 0, 4);
@@ -140,7 +147,7 @@ public class Lcourse {
 			distance = distancetask.getDistance();
 
 
-			if(distance > 2.0F){
+			if(distance > 8.5F){
 				driveTimer.cancel();
 				distanceTimer.cancel();
 				break;
